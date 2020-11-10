@@ -18,8 +18,6 @@
 	<!-- Custom styles for this template-->
 	<link href="<?= base_url() ?>public/dist/css/sb-admin-2.min.css" rel="stylesheet">
 	<link href="<?= base_url() ?>public/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-	<link href="<?= base_url() ?>public/vendor/danielupload/dist/css/jquery.dm-uploader.min.css" rel="stylesheet">
-	<link href="<?= base_url() ?>public/vendor/danielupload/demo/styles.css" rel="stylesheet">
 	<link href="<?= base_url() ?>/public/vendor/summernote/summernote-bs4.min.css" rel="stylesheet">
 
 
