@@ -6,10 +6,11 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="">
-	<meta name="author" content="">
+	<meta name="description" content="Program Pascasarjana UMY">
+	<meta name="author" content="Program Pascasarjana UMY">
+	<meta name="robots" content="noindex, nofollow">
 
-	<title><?= (isset($title)) ? $title : 'SIMPELMA PPs UMY'; ?></title>
+	<title><?= (isset($title)) ? $title : 'Sistem Pelayanan Pascasarjana UMY'; ?></title>
 
 	<!-- Custom fonts for this template-->
 	<link href="<?= base_url() ?>public/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -19,7 +20,6 @@
 	<link href="<?= base_url() ?>public/dist/css/sb-admin-2.min.css" rel="stylesheet">
 	<link href="<?= base_url() ?>public/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 	<link href="<?= base_url() ?>/public/vendor/summernote/summernote-bs4.min.css" rel="stylesheet">
-
 
 	<!-- Bootstrap core JavaScript-->
 	<script src="<?= base_url() ?>public/vendor/jquery/jquery.min.js"></script>
