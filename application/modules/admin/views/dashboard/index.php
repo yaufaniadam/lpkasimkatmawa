@@ -4,7 +4,8 @@
 			<div class="card-body p-5">
 				<div class="row justify-content-between">
 					<div class="col">
-						<h2 class="text-primary">Selamat Datang, <?php echo $_SESSION['username']; ?>!</h2>
+						<h2 class="text-primary">Selamat Datang,</h2>
+						<h3 class="text-primary"><?php echo $_SESSION['fullname']; ?>!</h3>
 						<p class="text-gray-700">Ini merupakan halaman pengelolaan SIM Pelayanan Mahasiswa Program Pascasarjana UMY.</p>
 						<a class="btn btn-primary btn-sm px-3 py-2" href="<?= base_url("admin/surat/index/" . $this->session->userdata('role')); ?>">
 							Lihat Surat masuk

@@ -55,6 +55,7 @@ class Pengguna extends Admin_Controller
 					'username' => $this->input->post('username'),
 					'email' => $this->input->post('email'),
 					'role' => $this->input->post('role'),
+					'fullname' => $this->input->post('nama'),
 					'password' =>  password_hash($this->input->post('password'), PASSWORD_BCRYPT),
 					'created_at' => date('Y-m-d : h:m:s'),
 					'updated_at' => date('Y-m-d : h:m:s'),
@@ -63,12 +64,6 @@ class Pengguna extends Admin_Controller
 				$data = $this->security->xss_clean($data);
 				$result = $this->pengguna_model->add_user($data);
 				if ($result) {
-					$profil = array(
-						'id_user' => $this->db->insert_id(),
-						'nama' => $this->input->post('nama'),
-						'id_prodi' => $this->input->post('id_prodi')
-					);
-					$this->db->set($profil)->insert('profil');
 					$this->session->set_flashdata('msg', 'Pengguna berhasil ditambahkan!');
 					redirect(base_url('admin/pengguna'));
 				}

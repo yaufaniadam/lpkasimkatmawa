@@ -1,7 +1,7 @@
 <div class="kertas">
-  <table style="width:100%">
+  <table>
     <tr>
-      <td width="60%">
+      <td width="70%">
         <table style="width: 100%;">
           <tr>
             <td width="15%">Nomor</td>
@@ -21,7 +21,7 @@
     <tr>
       <td colspan="2">
         <p>Kepada Yth:<br />
-          <strong><?= ($no_surat['instansi']) ? $no_surat['instansi'] : $surat['tujuan_surat']; ?></strong><br />
+          <strong><?= ($no_surat['instansi']) ? $no_surat['instansi'] : $surat['tujuan_surat']; ?></strong>
           di-<br />
           Tempat
         </p>
@@ -45,13 +45,13 @@
       <td>NIM</td>
       <td> : <?= $surat['username']; ?></td>
     </tr>
-
   </table>
 
-  <p>Bermaksud untuk mengajukan kembali aktif perkuliahan. Bersama ini kami lampirkan dokumen persyaratan yang dibutuhkan. </p>
+  <p>Bermaksud untuk melakukan penelitian dengan tema <strong><?= get_meta_value('tujuan_penelitian', $surat['id'], false); ?></strong>. Maka, kami mohon mahasiswa yang bersangkutan dapat diberikan ijin untuk melaksanakan penelitian di tempat yang Bapak/Ibu pimpin selama <?= get_meta_value('waktu_penelitian', $surat['id'], false); ?>. </p>
+  <!-- date formatnya dibenerin lagi -->
+
   <p>Demikian surat ini kami sampaikan. Atas perhatiannya kami ucapkan terima kasih.</p>
   <p><em>Wassalamulaikum warahmatullaahi wabarakatuh</em></p>
-
 
   <table>
     <tr>

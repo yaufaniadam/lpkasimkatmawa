@@ -37,19 +37,12 @@
 		<div class="sidebar-heading">
 			Pengaturan
 		</div>
-		<li class="nav-item has_child" id="menu_pengguna">
-			<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#sub_pengguna" aria-expanded="true" aria-controls="sub_pengguna">
+
+		</li>
+		<li class="nav-item" id="menu_pengguna">
+			<a class="nav-link" href="<?= base_url("admin/pengguna"); ?>">
 				<i class="fas fa-fw fa-users"></i>
-				<span>Pengguna</span>
-			</a>
-			<div id="sub_pengguna" class="collapse" aria-labelledby="heading_pengguna" data-parent="#accordionSidebar">
-				<div class="bg-white-op-9 py-2 collapse-inner rounded">
-					<!-- beri nama class yg sama dgn method/functionnya -->
-					<a class="collapse-item index" href="<?= base_url("admin/pengguna"); ?>">Semua Pengguna</a>
-					<a class="collapse-item tambah" href="<?= base_url("admin/pengguna/tambah"); ?>">Tambah Pengguna</a>
-					<a class="collapse-item upload" href="<?= base_url("admin/pengguna/upload"); ?>">Upload Pengguna</a>
-				</div>
-			</div>
+				<span>Pengguna</span></span></a>
 		</li>
 		<li class="nav-item" id="menu_prodi">
 			<a class="nav-link" href="<?= base_url("admin/prodi"); ?>">

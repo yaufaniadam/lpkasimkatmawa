@@ -156,6 +156,46 @@ function generate_form_field($id, $id_surat, $id_status)
 		<?= (($fields['verifikasi'] == 0) && ($id_status == 4)) ? 'is-invalid' : ''; ?>" id="input-<?= $id; ?>" name="dokumen[<?= $id; ?>]" <?= ($id_status == 1 && $fields['verifikasi'] == 0 || $id_status == 4 && $fields['verifikasi'] == 0) ? "" : "disabled"; ?>><?= (validation_errors()) ? set_value('dokumen[' . $id . ']') :  $fields['value'];  ?></textarea>
 		<span class="text-danger"><?php echo form_error('dokumen[' . $id . ']'); ?></span>
 
+	<?php } elseif ($fields['type'] == 'text') {  ?>
+
+		<input type="text" class="form-control" value="<?= (validation_errors()) ? set_value('dokumen[' . $id . ']') :  $fields['value'];  ?>" <?= (form_error('dokumen[' . $id . ']')) ? 'is-invalid' : ''; ?> <?= (($fields['verifikasi'] == 0) && ($id_status == 4)) ? 'is-invalid' : ''; ?>" id="input-<?= $id; ?>" name="dokumen[<?= $id; ?>]" <?= ($id_status == 1 && $fields['verifikasi'] == 0 || $id_status == 4 && $fields['verifikasi'] == 0) ? "" : "disabled"; ?> />
+		<span class="text-danger"><?php echo form_error('dokumen[' . $id . ']'); ?></span>
+
+
+	<?php } elseif ($fields['type'] == 'date_range') {  ?>
+
+
+
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"></script>
+
+		<script type="text/javascript" src="<?= base_url() ?>/public/plugins/daterangepicker/daterangepicker.js"></script>
+		<link rel="stylesheet" type="text/css" href="<?= base_url() ?>/public/plugins/daterangepicker/daterangepicker.css" />
+
+		<input type="text" class="form-control" value="<?= (validation_errors()) ? set_value('dokumen[' . $id . ']') :  $fields['value'];  ?>" <?= (form_error('dokumen[' . $id . ']')) ? 'is-invalid' : ''; ?> <?= (($fields['verifikasi'] == 0) && ($id_status == 4)) ? 'is-invalid' : ''; ?>" id="input-<?= $id; ?>" name="dokumen[<?= $id; ?>]" <?= ($id_status == 1 && $fields['verifikasi'] == 0 || $id_status == 4 && $fields['verifikasi'] == 0) ? "" : "disabled"; ?> />
+
+		<script type="text/javascript">
+			$(function() {
+
+				$('#input-<?= $id; ?>').daterangepicker({
+					autoUpdateInput: false,
+					locale: {
+						cancelLabel: 'Clear'
+					}
+				});
+
+				$('#input-<?= $id; ?>').on('apply.daterangepicker', function(ev, picker) {
+					$(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+				});
+
+				$('#input-<?= $id; ?>').on('cancel.daterangepicker', function(ev, picker) {
+					$(this).val('');
+				});
+
+			});
+		</script>
+
+		<span class="text-danger"><?php echo form_error('dokumen[' . $id . ']'); ?></span>
+
 	<?php } elseif ($fields['type'] == 'ta') { //tahun akademik 
 	?>
 		<select class="form-control
@@ -183,12 +223,27 @@ function generate_form_field($id, $id_surat, $id_status)
 			$cur_year = date("Y");
 			$cur_semester = (date("n") <= 6) ?  "Genap" : "Ganjil";
 			?>
-			<option value="Ganjil" <?php
-															echo (validation_errors()) ? set_select('dokumen[' . $id . ']', "Ganjil") : "";
-															echo ($fields['value'] == "Ganjil") ? "selected" : ""; ?>>Ganjil</option>
-			<option value="Genap" <?php
-														echo (validation_errors()) ? set_select('dokumen[' . $id . ']', "Genap") : "";
-														echo ($fields['value'] == "Genap") ? "selected" : ""; ?>>Genap</option>
+			<option value="Ganjil" <?= (validation_errors()) ? set_select('dokumen[' . $id . ']', "Ganjil") : ""; ?><?= ($fields['value'] == "Ganjil") ? "selected" : ""; ?>>Ganjil</option>
+			<option value="Genap" <?= (validation_errors()) ? set_select('dokumen[' . $id . ']', "Genap") : ""; ?> <?= ($fields['value'] == "Genap") ? "selected" : ""; ?>>Genap</option>
+		</select>
+		<span class="text-danger"><?php echo form_error('dokumen[' . $id . ']'); ?></span>
+
+		<!--  Piih Pembimbing -->
+	<?php } elseif ($fields['type'] == 'select_pembimbing') { //tahun akademik 
+	?>
+		<select class="form-control
+		<?= (form_error('dokumen[' . $id . ']')) ? 'is-invalid' : ''; ?> 
+		<?= (($fields['verifikasi'] == 0) && ($id_status == 4)) ? 'is-invalid' : ''; ?>" name="dokumen[<?= $id; ?>]" id="input-<?= $id; ?>" <?= ($id_status == 1 && $fields['verifikasi'] == 0 || $id_status == 4 && $fields['verifikasi'] == 0) ? "" : "disabled"; ?>>
+			<option value=""> -- Pilih Dosen -- </option>
+			<?php
+			$CI = &get_instance();
+			$CI->db->order_by('id', 'DESC');
+			$dosen = $CI->db->get_where('users', array('role' => 4))->result_array();
+
+			foreach ($dosen as $dosen) {
+			?>
+				<option value="<?= $dosen['id'] ?>" <?= (validation_errors()) ? set_select('dokumen[' . $id . ']',  $dosen['id']) : ""; ?><?= ($fields['value'] ==  $dosen['id']) ? "selected" : ""; ?>><?= $dosen['fullname'] ?></option>
+			<?php } ?>
 		</select>
 		<span class="text-danger"><?php echo form_error('dokumen[' . $id . ']'); ?></span>
 	<?php }
@@ -521,6 +576,46 @@ function generate_keterangan_surat($id, $id_surat, $id_status)
 			</div>
 
 		<?php }
+	} elseif ($fields['type'] == 'text') { ?>
+
+		<input type="text" class="form-control mb-2" id="input-<?= $id; ?>" disabled value="<?= $fields['value'];  ?>" />
+
+		<?php if ((($id_status == 2 && $fields['verifikasi'] == 0) || ($id_status == 5 && $fields['verifikasi'] == 0))
+			&& $CI->session->userdata('role') == 2
+		) { ?>
+
+			<div class="d-inline">
+				<input type="hidden" name="verifikasi[<?= $id; ?>]" value="0" />
+				<label class="switch">
+					<input type="checkbox" class="verifikasi" name="verifikasi[<?= $id; ?>]" value="1" <?= ($fields['verifikasi'] == 1) ? 'checked' : ''; ?> />
+					<span class="slider round"></span>
+				</label>
+			</div>
+			<div class="d-inline">
+				Data sudah sesuai? <a class="help" data-toggle="tooltip" data-placement="right" title="Klik tombol di samping jika data sudah sesuai"><i class="fa fa-info-circle"></i></a>
+			</div>
+
+		<?php }
+	} elseif ($fields['type'] == 'date_range') { ?>
+
+		<input type="text" class="form-control mb-2" id="input-<?= $id; ?>" disabled value="<?= $fields['value'];  ?>" />
+
+		<?php if ((($id_status == 2 && $fields['verifikasi'] == 0) || ($id_status == 5 && $fields['verifikasi'] == 0))
+			&& $CI->session->userdata('role') == 2
+		) { ?>
+
+			<div class="d-inline">
+				<input type="hidden" name="verifikasi[<?= $id; ?>]" value="0" />
+				<label class="switch">
+					<input type="checkbox" class="verifikasi" name="verifikasi[<?= $id; ?>]" value="1" <?= ($fields['verifikasi'] == 1) ? 'checked' : ''; ?> />
+					<span class="slider round"></span>
+				</label>
+			</div>
+			<div class="d-inline">
+				Data sudah sesuai? <a class="help" data-toggle="tooltip" data-placement="right" title="Klik tombol di samping jika data sudah sesuai"><i class="fa fa-info-circle"></i></a>
+			</div>
+
+		<?php }
 	} elseif ($fields['type'] == 'sem') { ?>
 
 
@@ -543,6 +638,29 @@ function generate_keterangan_surat($id, $id_surat, $id_status)
 	} elseif ($fields['type'] == 'ta') { ?>
 
 		<input type="text" class="form-control mb-2" id="input-<?= $id; ?>" disabled value="<?= $fields['value'];  ?>"></input>
+
+		<?php if ((($id_status == 2 && $fields['verifikasi'] == 0) || ($id_status == 5 && $fields['verifikasi'] == 0))
+			&& $CI->session->userdata('role') == 2
+		) { ?>
+			<div class="d-inline">
+				<input type="hidden" name="verifikasi[<?= $id; ?>]" value="0" />
+				<label class="switch">
+					<input type="checkbox" class="verifikasi" name="verifikasi[<?= $id; ?>]" value="1" <?= ($fields['verifikasi'] == 1) ? 'checked' : ''; ?> />
+					<span class="slider round"></span>
+				</label>
+			</div>
+			<div class="d-inline">
+				Data sudah sesuai? <a class="help" data-toggle="tooltip" data-placement="right" title="Klik tombol di samping jika data sudah sesuai"><i class="fa fa-info-circle"></i></a>
+			</div>
+
+		<?php }
+	} elseif ($fields['type'] == 'select_pembimbing') {
+
+		$CI = &get_instance();
+		$dosen = $CI->db->get_where('users', array('id' => $fields['value']))->row_array();
+		?>
+
+		<input type="text" class="form-control mb-2" id="input-<?= $id; ?>" disabled value="<?= $dosen['fullname'];  ?>"></input>
 
 		<?php if ((($id_status == 2 && $fields['verifikasi'] == 0) || ($id_status == 5 && $fields['verifikasi'] == 0))
 			&& $CI->session->userdata('role') == 2

@@ -50,7 +50,10 @@
 						$kat_keterangan_surat = kat_keterangan_surat($value)['kat_keterangan_surat']; ?>
 
 						<div class="form-group row">
-							<label class="col-md-5" for="dokumen[<?= $value; ?>]"><?= kat_keterangan_surat($value)['kat_keterangan_surat']; ?></label>
+							<label class="col-md-5" for="dokumen[<?= $value; ?>]"><?= kat_keterangan_surat($value)['kat_keterangan_surat']; ?>
+								<small id="emailHelp" class="form-text text-muted"><?= kat_keterangan_surat($value)['deskripsi']; ?></small>
+
+							</label>
 							<div class="col-md-7">
 								<?php generate_form_field($value, $surat['id'], $surat['id_status']); ?>
 							</div>

@@ -21,7 +21,7 @@
     <tr>
       <td colspan="2">
         <p>Kepada Yth:<br />
-          <strong><?= ($no_surat['instansi']) ? $no_surat['instansi'] : $surat['tujuan_surat']; ?></strong>
+          <strong><?= ($no_surat['instansi']) ? $no_surat['instansi'] : $surat['tujuan_surat']; ?></strong><br />
           di-<br />
           Tempat
         </p>

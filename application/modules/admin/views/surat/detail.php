@@ -391,7 +391,9 @@ mestinya ketika user mengganti, error messagenya langsung ilang -->
 								<small id="emailHelp" class="form-text text-muted">Tujuan surat bisa diganti jika diperlukan.</small>
 							</label>
 							<div class="col-md-8">
-								<textarea name="instansi" id="" cols="30" rows="3" class="textarea-summernote <?= (form_error('instansi')) ? 'is-invalid' : ''; ?> "><?= $surat['tujuan_surat']; ?></textarea>
+								<textarea name="instansi" id="" cols="30" rows="3" class="textarea-summernote <?= (form_error('instansi')) ? 'is-invalid' : ''; ?> ">
+								<?= ($surat['tujuan_surat']) ? $surat['tujuan_surat'] : get_meta_value('tujuan_surat', $surat['id'], false);  ?>
+							</textarea>
 								<span class="text-danger"><?php echo form_error('instansi'); ?></span>
 							</div>
 						</div>

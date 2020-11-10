@@ -7,6 +7,7 @@ class Surat extends Mahasiswa_Controller
 		$this->load->library('mailer');
 		$this->load->model('surat_model', 'surat_model');
 		$this->load->model('notif/Notif_model', 'notif_model');
+		$this->load->helper('date');
 	}
 
 	public function index()
@@ -138,7 +139,6 @@ class Surat extends Mahasiswa_Controller
 							)
 						);
 					}
-
 
 					// kirim notifikasi
 					$data_notif = array(

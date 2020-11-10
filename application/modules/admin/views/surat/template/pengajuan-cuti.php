@@ -22,7 +22,7 @@
     <tr>
       <td colspan="2">
         <p>Kepada Yth:<br />
-          <strong><?= ($no_surat['instansi']) ? $no_surat['instansi'] : $surat['tujuan_surat']; ?></strong>
+          <strong><?= ($no_surat['instansi']) ? $no_surat['instansi'] : $surat['tujuan_surat']; ?></strong><br />
           di-<br />
           Tempat
         </p>
@@ -91,13 +91,10 @@
 <?php $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-P']);
 $mpdf->AddPage(); ?>
 
-<h3>Lampiran-lampiran&nbsp;</h3>
-
-
 <?php $dokumen = get_dokumen_syarat($surat['id']);
 
 foreach ($dokumen as $dokumen) { ?>
-
-  <p><?= $dokumen['kat_keterangan_surat']; ?></p><img src="<?= base_url($dokumen['file']); ?>" />
-
+  <div class="kertas">
+    <p><?= $dokumen['kat_keterangan_surat']; ?></p><img src="<?= base_url($dokumen['file']); ?>" />
+  </div>
 <?php } ?>
