@@ -13,6 +13,14 @@
             font-size: 10pt;
         }
 
+        td.ttd-dir {
+            height: 200px;
+            text-align: center;
+            width: 70%;
+            background: url('<?= base_url('public/dist/img/ttd-dir.png'); ?>') center center no-repeat;
+            vertical-align: middle;
+        }
+
         table.nama {
             margin-bottom: 20px;
         }

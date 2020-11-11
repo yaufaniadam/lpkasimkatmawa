@@ -65,17 +65,19 @@
 
   <table style="width: 100%;">
     <tr>
-      <td style="text-align: center;width:70%">
-        <p>Mengetahui, </p>
+      <td class="ttd-dir">
+
         <p>Direktur </p>
         <br />
         <br />
         <br />
         <br />
-        <p>(Ir.Sri Atmaja P. Rosyidi, M.Sc.Eng., Ph.D., P.Eng.,IPM)</p>
+        <p><u>Ir.Sri Atmaja P. Rosyidi, M.Sc.Eng., Ph.D., P.Eng.,IPM</u><br>NIK. 19780415200004123046</p>
+
+
       </td>
-      <td style="text-align: center;">
-        <p>&nbsp; </p>
+      <td style="text-align: center; height:200px; vertical-align:middle">
+
         <p>Hormat saya, </p>
         <br />
         <br />
