@@ -105,53 +105,27 @@ class Auth extends CI_Controller
 					// jika login benar
 					if ($ceknum == 0) {
 						// cek user ke tabel Mhs (SQLSERVER UMY)
-						$db2 = $this->load->database('dbsqlsrv', TRUE);
 
-						$result = $db2->query("SELECT * from V_Simpel_Pasca WHERE EMAIL ='$email' ")->row_array();
+						$result = $this->db->query("SELECT * from dbo.V_Mahasiswa WHERE EMAIL ='$email' ")->row_array();
 
 
-						//cek apakah mahasiswa pasca
-						// jika iya, diperbolehkan login
-						if ($result['name_of_faculty'] === "PASCA SARJANA") {
 
-							//cek keaktifan semester ini
-							$thn_ajaran = date('Y');
-							$cur_semester = (date("n") <= 6) ?  0 : 1;
-							$nim = $result['STUDENTID'];
+						$user_data = array(
+							'studentid' => $result['STUDENTID'],
+							'fullname' => $result['FULLNAME'],
+							'email' => $result['EMAIL'],
+							'fakultas' => $result['name_of_faculty'],
+							'id_prodi' => $result['department_id'],
+							'role' => 3,
+							'created_at' => date('Y-m-d : h:m:s'),
+						);
 
-							$cek_aktif = $db2->query("select* FROM [s1makumyny4].[dbo].[V_Simpel_Pasca]  where studentid in (select studentid from STUDENT_COURSE_KRS where thajaranid='$thn_ajaran' and termid='$cur_semester')
-					and studentid='$nim'");
+						$this->session->set_userdata($user_data);
+						$this->session->set_userdata('is_login', TRUE);
 
-							$user_data = array(
-								'username' => $result['STUDENTID'],
-								'fullname' => $result['FULLNAME'],
-								'email' => $result['EMAIL'],
-								'telp' => $result['TELP'],
-								'fakultas' => $result['name_of_faculty'],
-								'id_prodi' => $result['department_id'],
-								'role' => 3,
-								'aktif' => ($cek_aktif->num_rows() > 0) ? 1 : 0,
-								'created_at' => date('Y-m-d : h:m:s'),
-							);
+						$this->session->set_userdata('user_id', $result);
 
-							$this->session->set_userdata($user_data);
-							$this->session->set_userdata('is_login', TRUE);
-
-							// cek di db lokal user apakah data user ada
-							$result = $this->auth_model->user_exist($data);
-							// jika tidak ada, isikan data ini ke table user
-							if (!$result) {
-								$reg = $this->auth_model->register($user_data);
-								$this->session->set_userdata('user_id', $reg);
-							} else {
-								$this->session->set_userdata('user_id', $result);
-							}
-							redirect(base_url('mahasiswa/surat'), 'refresh');
-						} else {
-							$data['ref'] = $referrer;
-							$data['msg'] = 'Anda tidak berhak mengakses!';
-							$this->load->view('auth/login', $data);
-						}
+						redirect(base_url('mahasiswa/dashboard'), 'refresh');
 					} else {
 						$data['ref'] = $referrer;
 						$data['msg'] = 'Invalid Username or Password!';

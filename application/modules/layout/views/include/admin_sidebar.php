@@ -6,7 +6,7 @@
 		<div class="sidebar-brand-icon">
 			<img src="<?= base_url() ?>public/dist/img/logo.png" width="40px" height="" />
 		</div>
-		<div class="sidebar-brand-text mx-3">SIMPELMA</div>
+		<div class="sidebar-brand-text mx-3">SIMKATMAWA</div>
 	</a>a
 
 	<!-- Divider -->

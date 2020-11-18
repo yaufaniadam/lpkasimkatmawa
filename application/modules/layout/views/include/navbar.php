@@ -7,26 +7,20 @@
   </button>
 
   <h1 class="h4 ml-2 mb-0 text-gray-800"><?= (isset($title)) ? $title : ''; ?></h1>
-  <?php if ($_SESSION['role'] == 3) { ?>
-    <a class="btn btn-md btn-ijomuda p-2 mx-3 my-4" style="border-radius:30px;" href="<?= base_url("mahasiswa/surat/ajukan"); ?>"><i class="fas fa-fw fa-plus"></i> Surat Baru</a>
-  <?php } ?>
-  <?php if ($_SESSION['role'] == 1) { ?>
-    <a class="btn btn-md btn-ijomuda p-2 mx-3 my-4" style="border-radius:30px;" href="<?= base_url("admin/surat/ajukan"); ?>"><i class="fas fa-fw fa-plus"></i> Surat Baru</a>
-  <?php } ?>
 
   <!-- Topbar Navbar -->
   <ul class="navbar-nav ml-auto">
 
     <!-- notif di sini -->
-    <?php tampil_notif(); ?>
-
+    <?php // tampil_notif(); 
+    ?>
 
     <div class="topbar-divider d-none d-sm-block"></div>
     <!-- Nav Item - User Information -->
     <li class="nav-item ">
       <a class="nav-link">
         <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $this->session->userdata('fullname'); ?></span>
-        <?= ($this->session->userdata('role') == 3) ? profPic($this->session->userdata('username'), 30) : ''; ?>
+        <?= ($this->session->userdata('role') == 3) ? profPic($this->session->userdata('studentid'), 30) : ''; ?>
       </a>
 
     </li>
